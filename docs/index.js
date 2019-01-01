@@ -23,7 +23,7 @@ const pages = [
 ReactDOM.render(
   <div>
     <GithubCorner
-      href="https://github.com/survivejs/react-component-boilerplate"
+      href="https://github.com/Eddort/qSlot"
       bannerColor="#fff"
       octoColor="#000"
       width={80}

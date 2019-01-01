@@ -1,5 +1,3 @@
-// this should be the entry point to your library
 module.exports = {
-  demo: require('./qSlot').default
+  demo: require("./qSlot").default
 };
-

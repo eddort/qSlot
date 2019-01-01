@@ -1,18 +1,16 @@
 module.exports = {
-  "extends": "airbnb",
-  "parser": "babel-eslint",
-  "env": {
-    "browser": true,
-    "jasmine": true,
-    "node": true
+  extends: ["airbnb", "prettier"],
+  parser: "babel-eslint",
+  env: {
+    browser: true,
+    jasmine: true,
+    node: true
   },
-  "globals": {
-    "test": true
+  globals: {
+    test: true
   },
-  "plugins": [
-    "react"
-  ],
-  "rules": {
+  plugins: ["react"],
+  rules: {
     "comma-dangle": ["error", "never"],
     "global-require": 0,
     "prefer-arrow-callback": 0,
