@@ -4,13 +4,13 @@ import { PropTypes } from 'prop-types';
 class qSlot extends React.Component {
   render() {
     return (
-      <div>{this.props.text}</div>
+      <div>{this.props.content}</div>
     );
   }
 }
 
 qSlot.propTypes = {
-  text: PropTypes.string.isRequired
+  content: PropTypes.string.isRequired
 };
 
 export default qSlot;

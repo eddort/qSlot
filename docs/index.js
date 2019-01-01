@@ -38,7 +38,7 @@ ReactDOM.render(
         js: props => <CodeSpecimen {...props} lang="javascript" />,
         jsx: props => <ReactSpecimen {...props} />
       }}
-      title="Boilerplate"
+      title="qSlot component"
     />
   </div>,
   document.getElementById('catalog')
