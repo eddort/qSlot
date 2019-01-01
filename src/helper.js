@@ -15,3 +15,14 @@ export const findByKey = (key, content, once = false) => {
 };
 
 export const by = key => findByKey.bind(null, key);
+
+export const prefixKey = key => `0:${key}`
+
+export const replace = (nodes, To, slotProps, Wrapper) => {
+  const unwrapped = nodes.map((node, i) => <To key={prefixKey(i)} {...node.props} {...slotProps} />);
+  return (
+    <Wrapper>
+      {unwrapped}
+    </Wrapper>
+  );
+};

@@ -1,25 +1,24 @@
 import React from "react";
 import { PropTypes } from "prop-types";
-import { getAvailElement } from "./helper";
+import { getAvailElement, replace } from "./helper";
 
 class qSlot extends React.Component {
   render() {
-    const { content, select, once = false, el } = this.props;
+    const { content, select, once = false, el, to } = this.props;
     const El = getAvailElement(el);
-    const nodes = select(content, once)
-    return <El {...this.props}>{nodes}</El>;
+    const nodes = select(content, once);
+    return replace(nodes, to, this.props, El, once);
   }
 }
 
 qSlot.propTypes = {
-  content: PropTypes.string.isRequired,
+  content: PropTypes.node.isRequired,
   select: PropTypes.func.isRequired,
   el: PropTypes.string,
   once: PropTypes.bool,
-  children: PropTypes.node,
-  to: PropTypes.node.isRequired
+  to: PropTypes.oneOfType([PropTypes.string, PropTypes.func]).isRequired
 };
 
-qSlot.defaultProps = { once: false, el: "div", children: "" };
+qSlot.defaultProps = { once: false, el: "div" };
 
 export default qSlot;
