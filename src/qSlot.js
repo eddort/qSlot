@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-class Welcome extends React.Component {
+class qSlot extends React.Component {
   render() {
     return (
       <div>{this.props.text}</div>
@@ -9,8 +9,8 @@ class Welcome extends React.Component {
   }
 }
 
-Welcome.propTypes = {
+qSlot.propTypes = {
   text: PropTypes.string.isRequired
 };
 
-export default Welcome;
+export default qSlot;
