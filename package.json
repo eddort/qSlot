@@ -1,9 +1,9 @@
 {
   "name": "react-component-boilerplate",
-  "description": "Boilerplate for React.js components",
-  "author": "Juho Vepsalainen",
-  "user": "survivejs",
-  "version": "6.1.2",
+  "description": "qSlot component",
+  "author": "Eddort",
+  "user": "Eddort",
+  "version": "0.0.1",
   "scripts": {
     "start": "catalog start docs",
     "test": "jest",
@@ -84,5 +84,8 @@
   "license": "MIT",
   "pre-push": [
     "test"
-  ]
+  ],
+  "dependencies": {
+    "babel-preset-es2015": "^6.24.1"
+  }
 }
