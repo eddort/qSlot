@@ -25,7 +25,7 @@ export const findByKey = (
   { key, value = true, without = false },
   content,
   once = false,
-  slotIndex = null
+  slotIndex = undefined
 ) => {
   const nodes = React.Children.toArray(content).filter(node => {
     let isFound;
@@ -36,11 +36,11 @@ export const findByKey = (
     }
     return isFound;
   });
-  if (nodes.length && once && slotIndex === null) {
+  if (nodes.length && once && slotIndex === undefined) {
     return [nodes[0]];
-  } else if (nodes.length && once && slotIndex >= 0 && nodes[slotIndex]) {
+  } else if (nodes.length && slotIndex >= 0 && nodes[slotIndex]) {
     return [nodes[slotIndex]];
-  } else if (nodes.length && once && slotIndex >= 0 && !nodes[slotIndex]) {
+  } else if (nodes.length && slotIndex >= 0 && !nodes[slotIndex]) {
     return [];
   }
   return nodes;

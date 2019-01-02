@@ -26,7 +26,7 @@ QSlot.defaultProps = {
   el: "div",
   content: undefined,
   to: "",
-  slotIndex: 0
+  slotIndex: undefined
 };
 
 export default QSlot;
