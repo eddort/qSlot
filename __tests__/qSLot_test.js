@@ -1,7 +1,7 @@
 import React from "react";
 import Enzyme, { shallow, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import { QSlot, byProps, byType, systemProps } from "../src/index";
+import { QSlot, byProps, byType, systemProps, without } from "../src/index";
 
 Enzyme.configure({ adapter: new Adapter() });
 const Header = () => <header>Test</header>;
@@ -172,5 +172,23 @@ test("System props must be removed", () => {
   );
 });
 
-// при обходе помечать уже вставленные ноды
-// обработка не переданных параметров
+test("'without' selector", () => {
+  const H = props => <div {...props}>{props.children}</div>;
+  const Test = props => (
+    <div>
+      <QSlot select={without("Header")} to={H} content={props.children} once />
+      <span>
+        <QSlot select={byType("Header")} to={Header} content={props.children} once />
+      </span>
+    </div>
+  );
+  const wrapper = mount(
+    <Test>
+      <Header slotType="Header" param="2" />
+      <div>HELLO</div>
+    </Test>
+  );
+  expect(wrapper.html()).toEqual(
+    '<div><div><div>HELLO</div></div><span><div><header>Test</header></div></span></div>'
+  );
+});
