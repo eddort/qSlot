@@ -1,5 +1,5 @@
 {
-  "name": "QSlot",
+  "name": "qslot",
   "description": "QSlot component like vue slot",
   "author": "Eddort",
   "user": "Eddort",
@@ -71,11 +71,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/survivejs/react-component-boilerplate.git"
+    "url": "https://github.com/Eddort/qSlot.git"
   },
-  "homepage": "https://survivejs.github.io/react-component-boilerplate/",
+  "homepage": "https://eddort.github.io/qSlot/",
   "bugs": {
-    "url": "https://github.com/survivejs/react-component-boilerplate/issues"
+    "url": "https://github.com/Eddort/qSlot/issues"
   },
   "jest": {
     "collectCoverage": true,
