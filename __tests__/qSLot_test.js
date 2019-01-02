@@ -1,8 +1,7 @@
 import React from "react";
 import Enzyme, { shallow, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import QSlot from "../src/QSlot";
-import { byProps, byType } from "../src/helper";
+import { QSlot, byProps, byType } from "../src/index";
 
 Enzyme.configure({ adapter: new Adapter() });
 const Header = () => <header>Test</header>;
@@ -11,7 +10,11 @@ test("Test component should return correct output", () => {
   const Test = props => (
     <div>
       hello
-      <QSlot select={byProps("props.slot")} to={Header} content={props.children} />
+      <QSlot
+        select={byProps("props.slot")}
+        to={Header}
+        content={props.children}
+      />
     </div>
   );
   const wrapper = shallow(
@@ -29,7 +32,12 @@ test("Substitution works once", () => {
   const Test = props => (
     <div>
       hello
-      <QSlot select={byProps("props.slot")} to={Header} content={props.children} once />
+      <QSlot
+        select={byProps("props.slot")}
+        to={Header}
+        content={props.children}
+        once
+      />
     </div>
   );
   const wrapper = shallow(
@@ -50,7 +58,11 @@ test("Without children", () => {
   const Test = props => (
     <div>
       hello
-      <QSlot select={byProps("props.slot")} to={Header} content={props.children} />
+      <QSlot
+        select={byProps("props.slot")}
+        to={Header}
+        content={props.children}
+      />
     </div>
   );
   const wrapper = shallow(<Test />);
@@ -61,7 +73,12 @@ test("Without children and with once prop", () => {
   const Test = props => (
     <div>
       hello
-      <QSlot select={byProps("props.slot")} to={Header} content={props.children} once />
+      <QSlot
+        select={byProps("props.slot")}
+        to={Header}
+        content={props.children}
+        once
+      />
     </div>
   );
   const wrapper = shallow(<Test />);
@@ -86,8 +103,8 @@ test("Assign props", () => {
       <H slot param="2" param2="22" />
     </Test>
   );
-  expect(wrapper.find('Header').prop('param')).toEqual("1");
-  expect(wrapper.find('Header').prop('param2')).toEqual("22");
+  expect(wrapper.find("Header").prop("param")).toEqual("1");
+  expect(wrapper.find("Header").prop("param2")).toEqual("22");
 });
 
 test("Assign props without default", () => {
@@ -106,8 +123,8 @@ test("Assign props without default", () => {
     <Test>
       <H slot param="2" />
     </Test>
-  )
-  expect(wrapper.find('Header').prop('param')).toEqual("2");
+  );
+  expect(wrapper.find("Header").prop("param")).toEqual("2");
 });
 
 test("Replace by type", () => {
@@ -127,9 +144,9 @@ test("Replace by type", () => {
     <Test>
       <Header slotType="Header" param="2" />
     </Test>
-  )
-  expect(wrapper.find('Header').prop('param')).toEqual("2");
-  expect(wrapper.find('Header').prop('slotParam')).toEqual("2");
+  );
+  expect(wrapper.find("Header").prop("param")).toEqual("2");
+  expect(wrapper.find("Header").prop("slotParam")).toEqual("2");
 });
 
 // удаление лишних аттрибутов

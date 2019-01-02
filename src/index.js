@@ -1,3 +1,4 @@
 module.exports = {
-  demo: require("./QSlot").default
+  QSlot: require("./QSlot").default,
+  ...require('./helper')
 };
