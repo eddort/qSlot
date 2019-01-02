@@ -1,3 +1,3 @@
 module.exports = {
-  demo: require("./qSlot").default
+  demo: require("./QSlot").default
 };
