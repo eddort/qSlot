@@ -13,7 +13,8 @@ export const systemProps = [
   "select",
   "content",
   "to",
-  "slotType"
+  "slotType",
+  "slotIndex"
 ];
 
 export const removeSystemProps = props => {
@@ -24,7 +25,8 @@ export const removeSystemProps = props => {
 export const findByKey = (
   { key, value = true, without = false },
   content,
-  once = false
+  once = false,
+  slotIndex = null
 ) => {
   const nodes = React.Children.toArray(content).filter((node, i) => {
     let isFound;
@@ -35,8 +37,12 @@ export const findByKey = (
     }
     return isFound;
   });
-  if (nodes.length && once) {
+  if (nodes.length && once && slotIndex === null) {
     return [nodes[0]];
+  } else if (nodes.length && once && slotIndex >= 0 && nodes[slotIndex]) {
+    return [nodes[slotIndex]];
+  } else if (nodes.length && once && slotIndex >= 0 && !nodes[slotIndex]) {
+    return [];
   }
   return nodes;
 };
@@ -52,9 +58,12 @@ export const without = value =>
 export const prefixKey = key => `0:${key}`;
 
 export const replace = (nodes, To, slotProps, Wrapper) => {
-  const unwrapped = nodes.map((node, i) => (
-    <To key={prefixKey(i)} {...mergeProps(node.props, slotProps)} />
-  ));
+  const unwrapped = nodes.map((node, i) => {
+    if (To) {
+      return <To key={prefixKey(i)} {...mergeProps(node.props, slotProps)} />;
+    }
+    return { ...node, ...mergeProps(node.props, slotProps) };
+  });
   return <Wrapper>{unwrapped}</Wrapper>;
 };
 

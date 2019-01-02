@@ -192,3 +192,42 @@ test("'without' selector", () => {
     '<div><div><div>HELLO</div></div><span><div><header>Test</header></div></span></div>'
   );
 });
+
+test("assign component", () => {
+  const Test = props => (
+    <div>
+      <QSlot select={byType("Header")} content={props.children} once />
+    </div>
+  );
+  const wrapper = mount(
+    <Test>
+      <Header slotType="Header" param="2" />
+      <div>HELLO</div>
+    </Test>
+  );
+  expect(wrapper.html()).toEqual(
+    '<div><div><header>Test</header></div></div>'
+  );
+});
+
+test("pick by index", () => {
+  const H = props => <div {...props}>{props.children}</div>;
+  const Test = props => (
+    // если убрать to - будет ошибка (удаление системных пропсов)
+    <div>
+      <QSlot select={byType("H")} to={H} content={props.children} once slotIndex={0} />
+      <QSlot select={byType("H")} to={H} content={props.children} once slotIndex={2} />
+    </div>
+  );
+  const wrapper = mount(
+    <Test>
+      <H slotType="H" param="2">one</H>
+      <H slotType="H" param="2">two</H>
+      <H slotType="H" param="2">three</H>
+    </Test>
+  );
+  console.log(wrapper.html())
+  expect(wrapper.html()).toEqual(
+    '<div><div><div param=\"2\">one</div></div><div><div param=\"2\">three</div></div></div>'
+  );
+});
