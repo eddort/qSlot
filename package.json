@@ -1,6 +1,6 @@
 {
-  "name": "react-component-boilerplate",
-  "description": "qSlot component",
+  "name": "QSlot",
+  "description": "QSlot component like vue slot",
   "author": "Eddort",
   "user": "Eddort",
   "version": "0.0.1",
