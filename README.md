@@ -3,7 +3,7 @@
 ## Examples
 your component
 ```(jsx)
-import { QSlot } from 'QSlot'
+import { QSlot, byProps } from 'QSlot'
 
 const Test = props => (
   <div>
