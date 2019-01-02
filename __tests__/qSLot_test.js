@@ -1,7 +1,7 @@
 import React from "react";
 import Enzyme, { shallow, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import { QSlot, byProps, byType } from "../src/index";
+import { QSlot, byProps, byType, systemProps } from "../src/index";
 
 Enzyme.configure({ adapter: new Adapter() });
 const Header = () => <header>Test</header>;
@@ -149,6 +149,28 @@ test("Replace by type", () => {
   expect(wrapper.find("Header").prop("slotParam")).toEqual("2");
 });
 
-// удаление лишних аттрибутов
+test("System props must be removed", () => {
+  const H = props => <div {...props} />;
+  const Test = props => (
+    <div>
+      <QSlot
+        select={byType("Header")}
+        to={Header}
+        content={props.children}
+        once
+        slotParam="2"
+      />
+    </div>
+  );
+  const wrapper = mount(
+    <Test>
+      <Header slotType="Header" param="2" />
+    </Test>
+  );
+  systemProps.forEach(sysProp =>
+    expect(wrapper.find("Header").prop(sysProp)).toEqual(undefined)
+  );
+});
+
 // при обходе помечать уже вставленные ноды
 // обработка не переданных параметров

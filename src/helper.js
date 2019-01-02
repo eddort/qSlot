@@ -6,6 +6,20 @@ export const availElements = ["div", "span"];
 export const getAvailElement = (el = "div") =>
   availElements.includes(el) ? el : "div";
 
+export const systemProps = [
+  "el",
+  "once",
+  "_slotIsTouched",
+  "select",
+  "content",
+  "to"
+];
+
+export const removeSystemProps = props => {
+  const availProps = { ...props };
+  systemProps.forEach(prop => delete availProps[prop]);
+  return availProps;
+};
 export const findByKey = ({ key, value = true }, content, once = false) => {
   const nodes = React.Children.toArray(content).filter(
     node => get(node, key) === value
