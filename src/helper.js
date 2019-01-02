@@ -27,7 +27,7 @@ export const findByKey = (
   once = false,
   slotIndex = null
 ) => {
-  const nodes = React.Children.toArray(content).filter((node, i) => {
+  const nodes = React.Children.toArray(content).filter(node => {
     let isFound;
     if (without) {
       isFound = !get(node, key) || get(node, key) !== value;

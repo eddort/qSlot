@@ -1,6 +1,7 @@
 import React from "react";
 import Enzyme, { shallow, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
+import { PropTypes } from "prop-types";
 import { QSlot, byProps, byType, systemProps, without } from "../src/index";
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -17,6 +18,13 @@ test("Test component should return correct output", () => {
       />
     </div>
   );
+
+  Test.propTypes = {
+    children: PropTypes.node
+  };
+  Test.defaultProps = {
+    children: ""
+  };
   const wrapper = shallow(
     <Test>
       <div slot />
@@ -40,6 +48,12 @@ test("Substitution works once", () => {
       />
     </div>
   );
+  Test.propTypes = {
+    children: PropTypes.node
+  };
+  Test.defaultProps = {
+    children: ""
+  };
   const wrapper = shallow(
     <Test>
       <div slot />
@@ -65,6 +79,12 @@ test("Without children", () => {
       />
     </div>
   );
+  Test.propTypes = {
+    children: PropTypes.node
+  };
+  Test.defaultProps = {
+    children: ""
+  };
   const wrapper = shallow(<Test />);
   expect(wrapper.html()).toEqual("<div>hello<div></div></div>");
 });
@@ -81,6 +101,12 @@ test("Without children and with once prop", () => {
       />
     </div>
   );
+  Test.propTypes = {
+    children: PropTypes.node
+  };
+  Test.defaultProps = {
+    children: ""
+  };
   const wrapper = shallow(<Test />);
   expect(wrapper.html()).toEqual("<div>hello<div></div></div>");
 });
@@ -98,6 +124,12 @@ test("Assign props", () => {
       />
     </div>
   );
+  Test.propTypes = {
+    children: PropTypes.node
+  };
+  Test.defaultProps = {
+    children: ""
+  };
   const wrapper = mount(
     <Test>
       <H slot param="2" param2="22" />
@@ -119,6 +151,12 @@ test("Assign props without default", () => {
       />
     </div>
   );
+  Test.propTypes = {
+    children: PropTypes.node
+  };
+  Test.defaultProps = {
+    children: ""
+  };
   const wrapper = mount(
     <Test>
       <H slot param="2" />
@@ -128,7 +166,6 @@ test("Assign props without default", () => {
 });
 
 test("Replace by type", () => {
-  const H = props => <div {...props} />;
   const Test = props => (
     <div>
       <QSlot
@@ -140,6 +177,12 @@ test("Replace by type", () => {
       />
     </div>
   );
+  Test.propTypes = {
+    children: PropTypes.node
+  };
+  Test.defaultProps = {
+    children: ""
+  };
   const wrapper = mount(
     <Test>
       <Header param="2" />
@@ -150,7 +193,6 @@ test("Replace by type", () => {
 });
 
 test("System props must be removed", () => {
-  const H = props => <div {...props} />;
   const Test = props => (
     <div>
       <QSlot
@@ -162,6 +204,12 @@ test("System props must be removed", () => {
       />
     </div>
   );
+  Test.propTypes = {
+    children: PropTypes.node
+  };
+  Test.defaultProps = {
+    children: ""
+  };
   const wrapper = mount(
     <Test>
       <Header param="2" />
@@ -174,14 +222,31 @@ test("System props must be removed", () => {
 
 test("'without' selector", () => {
   const H = props => <div {...props}>{props.children}</div>;
+  H.propTypes = {
+    children: PropTypes.node
+  };
+  H.defaultProps = {
+    children: ""
+  };
   const Test = props => (
     <div>
       <QSlot select={without("Header")} to={H} content={props.children} once />
       <span>
-        <QSlot select={byType("Header")} to={Header} content={props.children} once />
+        <QSlot
+          select={byType("Header")}
+          to={Header}
+          content={props.children}
+          once
+        />
       </span>
     </div>
   );
+  Test.propTypes = {
+    children: PropTypes.node
+  };
+  Test.defaultProps = {
+    children: ""
+  };
   const wrapper = mount(
     <Test>
       <Header param="2" />
@@ -189,7 +254,7 @@ test("'without' selector", () => {
     </Test>
   );
   expect(wrapper.html()).toEqual(
-    '<div><div><div>HELLO</div></div><span><div><header>Test</header></div></span></div>'
+    "<div><div><div>HELLO</div></div><span><div><header>Test</header></div></span></div>"
   );
 });
 
@@ -199,25 +264,41 @@ test("assign component", () => {
       <QSlot select={byType("Header")} content={props.children} once />
     </div>
   );
+  Test.propTypes = {
+    children: PropTypes.node
+  };
+  Test.defaultProps = {
+    children: ""
+  };
   const wrapper = mount(
     <Test>
       <Header param="2" />
       <div>HELLO</div>
     </Test>
   );
-  expect(wrapper.html()).toEqual(
-    '<div><div><header>Test</header></div></div>'
-  );
+  expect(wrapper.html()).toEqual("<div><div><header>Test</header></div></div>");
 });
 
 test("pick by index", () => {
   const H = props => <div {...props}>{props.children}</div>;
+  H.propTypes = {
+    children: PropTypes.node
+  };
+  H.defaultProps = {
+    children: ""
+  };
   const Test = props => (
     <div>
       <QSlot select={byType("H")} content={props.children} once slotIndex={0} />
       <QSlot select={byType("H")} content={props.children} once slotIndex={2} />
     </div>
   );
+  Test.propTypes = {
+    children: PropTypes.node
+  };
+  Test.defaultProps = {
+    children: ""
+  };
   const wrapper = mount(
     <Test>
       <H param="2">one</H>
@@ -226,6 +307,6 @@ test("pick by index", () => {
     </Test>
   );
   expect(wrapper.html()).toEqual(
-    '<div><div><div param=\"2\">one</div></div><div><div param=\"2\">three</div></div></div>'
+    '<div><div><div param="2">one</div></div><div><div param="2">three</div></div></div>'
   );
 });
