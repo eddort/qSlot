@@ -97,6 +97,7 @@
     "test"
   ],
   "dependencies": {
-    "babel-preset-es2015": "^6.24.1"
+    "babel-preset-es2015": "^6.24.1",
+    "lodash.get": "^4.4.2"
   }
 }

@@ -1,14 +1,14 @@
 import React from "react";
+import get from "lodash.get";
 
 export const availElements = ["div", "span"];
 
 export const getAvailElement = (el = "div") =>
   availElements.includes(el) ? el : "div";
 
-export const findByKey = (key, content, once = false) => {
+export const findByKey = ({ key, value = true }, content, once = false) => {
   const nodes = React.Children.toArray(content).filter(node => {
-    const props = node.props || {};
-    return props[key] === true;
+    return get(node, key) === value;
   });
   if (nodes.length && once) {
     return [nodes[0]];
@@ -16,7 +16,9 @@ export const findByKey = (key, content, once = false) => {
   return nodes;
 };
 
-export const by = key => findByKey.bind(null, key);
+export const byProps = key => findByKey.bind(null, { key });
+
+export const byType = value => findByKey.bind(null, { key: 'props.slotType', value });
 
 export const prefixKey = key => `0:${key}`;
 
