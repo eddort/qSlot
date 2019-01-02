@@ -142,7 +142,7 @@ test("Replace by type", () => {
   );
   const wrapper = mount(
     <Test>
-      <Header slotType="Header" param="2" />
+      <Header param="2" />
     </Test>
   );
   expect(wrapper.find("Header").prop("param")).toEqual("2");
@@ -164,7 +164,7 @@ test("System props must be removed", () => {
   );
   const wrapper = mount(
     <Test>
-      <Header slotType="Header" param="2" />
+      <Header param="2" />
     </Test>
   );
   systemProps.forEach(sysProp =>
@@ -184,7 +184,7 @@ test("'without' selector", () => {
   );
   const wrapper = mount(
     <Test>
-      <Header slotType="Header" param="2" />
+      <Header param="2" />
       <div>HELLO</div>
     </Test>
   );
@@ -201,7 +201,7 @@ test("assign component", () => {
   );
   const wrapper = mount(
     <Test>
-      <Header slotType="Header" param="2" />
+      <Header param="2" />
       <div>HELLO</div>
     </Test>
   );
@@ -213,20 +213,18 @@ test("assign component", () => {
 test("pick by index", () => {
   const H = props => <div {...props}>{props.children}</div>;
   const Test = props => (
-    // если убрать to - будет ошибка (удаление системных пропсов)
     <div>
-      <QSlot select={byType("H")} to={H} content={props.children} once slotIndex={0} />
-      <QSlot select={byType("H")} to={H} content={props.children} once slotIndex={2} />
+      <QSlot select={byType("H")} content={props.children} once slotIndex={0} />
+      <QSlot select={byType("H")} content={props.children} once slotIndex={2} />
     </div>
   );
   const wrapper = mount(
     <Test>
-      <H slotType="H" param="2">one</H>
-      <H slotType="H" param="2">two</H>
-      <H slotType="H" param="2">three</H>
+      <H param="2">one</H>
+      <H param="2">two</H>
+      <H param="2">three</H>
     </Test>
   );
-  console.log(wrapper.html())
   expect(wrapper.html()).toEqual(
     '<div><div><div param=\"2\">one</div></div><div><div param=\"2\">three</div></div></div>'
   );

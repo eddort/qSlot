@@ -13,7 +13,6 @@ export const systemProps = [
   "select",
   "content",
   "to",
-  "slotType",
   "slotIndex"
 ];
 
@@ -50,10 +49,10 @@ export const findByKey = (
 export const byProps = key => findByKey.bind(null, { key });
 
 export const byType = value =>
-  findByKey.bind(null, { key: "props.slotType", value });
+  findByKey.bind(null, { key: "type.name", value });
 
 export const without = value =>
-  findByKey.bind(null, { key: "props.slotType", value, without: true });
+  findByKey.bind(null, { key: "type.name", value, without: true });
 
 export const prefixKey = key => `0:${key}`;
 
