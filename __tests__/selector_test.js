@@ -2,7 +2,7 @@ import React from "react";
 import Enzyme, { mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import { PropTypes } from "prop-types";
-import { QSlot, byType, without } from "../src/index";
+import { QSlot, byType, byProps, without } from "../src/index";
 
 Enzyme.configure({ adapter: new Adapter() });
 const Header = () => <header>Test</header>;
@@ -122,5 +122,103 @@ test("pick by index", () => {
   );
   expect(wrapper.html()).toEqual(
     '<div><div><div param="2">one</div></div><div><div param="2">three</div></div></div>'
+  );
+});
+
+test("by slot type", () => {
+  const H = props => <div {...props}>{props.children}</div>;
+  H.propTypes = {
+    children: PropTypes.node
+  };
+  H.defaultProps = {
+    children: ""
+  };
+  const Test = props => (
+    <div>
+      <QSlot
+        select={byProps("slottype", "H")}
+        content={props.children}
+        once
+        slotIndex={0}
+      />
+      <QSlot
+        select={byProps("slottype", "H")}
+        content={props.children}
+        once
+        slotIndex={2}
+      />
+    </div>
+  );
+  Test.propTypes = {
+    children: PropTypes.node
+  };
+  Test.defaultProps = {
+    children: ""
+  };
+  const wrapper = mount(
+    <Test>
+      <H slottype="H" param="2">
+        one
+      </H>
+      <H slottype="H" param="2">
+        two
+      </H>
+      <H slottype="H" param="2">
+        three
+      </H>
+    </Test>
+  );
+  expect(wrapper.html()).toEqual(
+    '<div><div><div slottype="H" param="2">one</div></div><div><div slottype="H" param="2">three</div></div></div>'
+  );
+});
+
+test("group select", () => {
+  const H = props => <div {...props}>{props.children}</div>;
+  H.propTypes = {
+    children: PropTypes.node
+  };
+  H.defaultProps = {
+    children: ""
+  };
+  const Test = props => (
+    <div>
+      <QSlot
+        select={byProps("slottype", "H")}
+        content={props.children}
+        once
+        slotIndex={0}
+      />
+      <QSlot
+        select={[byProps("slottype", "H"), byProps("children", "three")]}
+        content={props.children}
+        once
+      />
+    </div>
+  );
+  Test.propTypes = {
+    children: PropTypes.node
+  };
+  Test.defaultProps = {
+    children: ""
+  };
+  const wrapper = mount(
+    <Test>
+      <H slottype="H" param="2">
+        one
+      </H>
+      <H slottype="H" param="2">
+        two
+      </H>
+      <H slottype="H" param="2">
+        three
+      </H>
+      <H slottype="H" param="2">
+        three
+      </H>
+    </Test>
+  );
+  expect(wrapper.html()).toEqual(
+    '<div><div><div slottype="H" param="2">one</div></div><div><div slottype="H" param="2">three</div></div></div>'
   );
 });
