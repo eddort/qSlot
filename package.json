@@ -3,7 +3,7 @@
   "description": "QSlot component like vue slot",
   "author": "Eddort",
   "user": "eddort",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "scripts": {
     "start": "catalog start docs",
     "test": "jest",
