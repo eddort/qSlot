@@ -13,7 +13,7 @@ import '../style.css';
 const documentationImports = {};
 const pages = [
   {
-    path: '/',
+    path: '/qSlot/',
     title: 'Introduction',
     content: pageLoader(() => import('../README.md'))
   }
