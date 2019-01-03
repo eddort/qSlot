@@ -1,5 +1,5 @@
 # QSlot component
-
+[![Build Status](https://travis-ci.org/Eddort/qSlot.svg?branch=master)](https://travis-ci.org/Eddort/qSlot)
 ## Examples
 your component
 ```(jsx)
