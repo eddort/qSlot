@@ -67,7 +67,7 @@ export const replace = (nodes, To, slotProps, Wrapper) => {
 };
 
 export const mergeProps = (nProps, sProps) => {
-  const nodeProps = removeSystemProps(Object.assign({}, nProps));
+  const nodeProps = Object.assign({}, nProps);
   const slotProps = removeSystemProps(Object.assign({}, sProps));
   const className =
     typeof slotProps.className === "string"
