@@ -12,7 +12,7 @@ test("Test component should return correct output", () => {
     <div>
       hello
       <QSlot
-        select={byProps("props.slot")}
+        select={byProps("slot", true)}
         to={Header}
         content={props.children}
       />
@@ -41,7 +41,7 @@ test("Substitution works once", () => {
     <div>
       hello
       <QSlot
-        select={byProps("props.slot")}
+        select={byProps("slot", true)}
         to={Header}
         content={props.children}
         once
@@ -73,7 +73,7 @@ test("Without children", () => {
     <div>
       hello
       <QSlot
-        select={byProps("props.slot")}
+        select={byProps("slot", true)}
         to={Header}
         content={props.children}
       />
@@ -94,7 +94,7 @@ test("Without children and with once prop", () => {
     <div>
       hello
       <QSlot
-        select={byProps("props.slot")}
+        select={byProps("slot", true)}
         to={Header}
         content={props.children}
         once
@@ -116,7 +116,7 @@ test("Assign props", () => {
   const Test = props => (
     <div>
       <QSlot
-        select={byProps("props.slot")}
+        select={byProps("slot", true)}
         to={Header}
         content={props.children}
         once
@@ -144,7 +144,7 @@ test("Assign props without default", () => {
   const Test = props => (
     <div>
       <QSlot
-        select={byProps("props.slot")}
+        select={byProps("slot", true)}
         to={Header}
         content={props.children}
         once

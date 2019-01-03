@@ -46,7 +46,7 @@ export const findByKey = (
   return nodes;
 };
 
-export const byProps = key => findByKey.bind(null, { key });
+export const byProps = (key, value) => findByKey.bind(null, { key: `props.${key}`, value });
 
 export const byType = value =>
   findByKey.bind(null, { key: "type.name", value });
